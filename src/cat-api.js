@@ -1,39 +1,32 @@
 
 
-const API_KEY = 'live_7fYGs8U6VUkhmH1EqJASCr4Nmw0HkzTBzlgKAS2FSbzKYbdew6oxdDDr9DQgAfwP';
+ const API_KEY = 'live_7fYGs8U6VUkhmH1EqJASCr4Nmw0HkzTBzlgKAS2FSbzKYbdew6oxdDDr9DQgAfwP';
+const url = 'https://api.thecatapi.com/v1';
 
 export function fetchBreeds() {
-  return new Promise((resolve, reject) => {
-    fetch('https://api.thecatapi.com/v1/breeds', {
+  return fetch(`${url}/breeds`, {
       headers: {
         'x-api-key': API_KEY
       }
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error('Error fetching breeds.');
+          throw new Error('Oops! Something went wrong! Try reloading the page!');
         }
         return response.json();
-      })
-      .then(data => resolve(data))
-      .catch(error => reject(error));
-  });
+      });
 }
 
 export function fetchCatByBreed(breedId) {
-  return new Promise((resolve, reject) => {
-    fetch(`https://api.thecatapi.com/v1/images/search?breed_id=${breedId}`, {
+  return fetch(`${url}/images/search?breed_id=${breedId}`, {
       headers: {
         'x-api-key': API_KEY
       }
     })
       .then(response => {
         if (!response.ok) {
-          throw new Error('Error fetching cat information.');
+          throw new Error('Oops! Something went wrong! Try reloading the page!');
         }
         return response.json();
-      })
-      .then(data => resolve(data))
-      .catch(error => reject(error));
-  });
+      });
 }
